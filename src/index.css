@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+html,
+body {
+    background: #0f0f0f;
+    color: white;
+    font-family: "Helvetica Neue";
+}
+
+@font-face {
+    font-family: "logo";
+    src: url(/src/assets/Fonts/NicoMoji-Regular.ttf);
+}
+
+:root {
+    --p-color: #2D7EFF;
+    --s-color: #b0ceff;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-marquee {
+  animation: marquee 10s linear infinite;
+}

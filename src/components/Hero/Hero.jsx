@@ -5,7 +5,7 @@ const Hero = () => {
     return (
         <section
             id="hero"
-            className="container mx-auto w-full pt-25 md:pt-0 min-h-screen flex items-center flex-col-reverse md:flex-row px-4 md:px-40 py-10 gap-10 text-white"
+            className="container mx-auto w-full h-fit pt-25 md:pt-0 min-h-screen flex items-center flex-col-reverse md:flex-row px-4 md:px-40 py-10 gap-10 text-white"
         >
             {/* Left Content */}
             <aside className="w-full text-center md:text-left">

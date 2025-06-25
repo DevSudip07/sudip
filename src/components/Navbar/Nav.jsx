@@ -15,14 +15,14 @@ const Nav = () => {
     const toggleMenu = () => setIsOpen(!isOpen);
 
     return (
-        <header className="fixed container mx-auto w-full h-20 text-white flex items-center px-6 md:px-40 z-50">
+        <header className="fixed container mx-auto w-full h-20 text-white flex items-center px-6 md:px-40 z-50 bg-black">
             <nav className="flex justify-between items-center w-full">
                 <h1 className="font-bold text-xl">SUDIP</h1>
 
                 {/* Desktop Nav */}
                 <ul className="hidden md:flex items-center space-x-6">
                     {navItems.map((nav, index) => (
-                        <li key={index} className="font-semibold hover:underline cursor-pointer">
+                        <li key={index} className="relative font-semibold py-0.3 after:absolute after:content-[''] after:w-0 after:h-[2px] after:bg-white after:bottom-0 after:left-0 after:rounded-2xl hover:after:w-full cursor-pointer after:duration-200">
                             {nav.name}
                         </li>
                     ))}

@@ -13,7 +13,7 @@ const Skills = () => {
     let skills = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10];
     return (
         <>
-            <section id="skills" className="container mx-auto w-full py-5 px-4 md:px-40">
+            <section id="skills" className="container mx-auto w-full h-fit py-5 px-4 md:px-40">
                 <div className="title text-[var(--p-color)] flex items-center gap-2 mb-5">
                     <h1 className="text-2xl font-bold">SKILLS</h1>
                     <div className="w-50 h-0.5 bg-[var(--p-color)] "></div>

@@ -17,6 +17,17 @@ body {
     --s-color: #b0ceff;
 }
 
+button {
+    transition: 0.2s all ease;
+}
+
+button:hover {
+    background: var(--p-color);
+    color: white;
+    border-color:  var(--p-color);
+    cursor: pointer;
+}
+
 @keyframes marquee {
     0% {
         transform: translateX(0);

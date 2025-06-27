@@ -1,4 +1,10 @@
-import { useState, useEffect } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import { useState, useEffect, useRef } from "react";
+gsap.registerPlugin(ScrollTrigger);
+
 
 const Projects = () => {
     const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
@@ -41,6 +47,51 @@ const Projects = () => {
     //         document.body.style.cursor = "default";
     //     };
     // }, [showCursor]);
+    let projectSection = useRef(null);
+    let projectCardsRef = useRef([]);
+    let tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: projectSection.current,
+            start: "top 50%",
+            end: "bottom 15%",
+            scrub: 2,
+            markers: true,
+        }
+    })
+    useGSAP(() => {
+        projectCardsRef.current.forEach((val, index) => {
+
+            if (index === 0) {
+                console.log("val", val);
+                const desDiv = val.querySelector(".des");
+                tl.to(desDiv, {
+                    left: 0,
+                    opacity: 1,
+                    duration: 1.2,
+                    ease: "power3.out",
+                }, "a+=0.5");
+            }
+
+            if (index === 1) {
+                const desDiv = val.querySelector(".des");
+                tl.to(desDiv, {
+                    right: 0,
+                    opacity: 1,
+                    duration: 1.2,
+                    ease: "power3.out",
+                }, "a+=0.7");
+            }
+
+            tl.from(val, {
+                opacity: 0,
+                scale: 0.1,
+                duration: 1.2,
+                ease: "power3.out",
+                stagger: 0.2,
+            }, "a+=0.5");
+        })
+    })
+
 
 
     return (
@@ -59,7 +110,7 @@ const Projects = () => {
                 </div>
             )}
 
-            <section id="projects" className="container mx-auto w-full h-fit py-10 px-4 md:px-40">
+            <section ref={projectSection} id="projects" className="container mx-auto w-full h-fit py-10 px-4 md:px-40">
                 <div className="title flex items-center gap-2 mb-5">
                     <h1 className="text-2xl font-bold">PROJECTS</h1>
                     <div className="w-50 h-0.5 bg-white"></div>
@@ -67,20 +118,20 @@ const Projects = () => {
 
                 <div className="projectContainer w-full md:w-5/6 h-full mt-15 mx-auto">
                     {projects.map((project, index) => (
-                        <div
+                        <div ref={(el) => (projectCardsRef.current[index] = el)}
                             key={index}
                             onMouseEnter={() => setShowCursor(true)}
                             onMouseLeave={() => setShowCursor(false)}
-                            className={`project w-full h-[350px] my-20 flex items-center ${index % 2 !== 0 ? "flex-row-reverse" : "flex-row"
+                            className={`project  w-full h-[350px] my-20 flex items-center ${index % 2 !== 0 ? "flex-row-reverse   " : "flex-row "
                                 }`}
                         >
                             <div
-                                className="image w-1/2 h-full rounded-2xl bg-red-700 bg-cover bg-center bg-no-repeat shadow-sm shadow-blue-500"
+                                className="image  z-10 w-1/2 h-full rounded-2xl bg-red-700 bg-cover bg-center bg-no-repeat shadow-sm shadow-blue-500"
                                 style={{ backgroundImage: `url(${project.image})` }}
                             ></div>
 
                             <div
-                                className={`des relative w-1/2 h-3/4 p-6 shadow-sm shadow-blue-500 ${index % 2 !== 0 ? "rounded-l-2xl" : "rounded-r-2xl"
+                                className={`des relative w-1/2 h-3/4 p-6 shadow-sm shadow-blue-500 ${index % 2 !== 0 ? "rounded-l-2xl  right-[-50%]" : "rounded-r-2xl left-[-50%] opacity-0"
                                     }`}
                             >
                                 <h2 className="text-xl font-semibold mb-2">{project.name}</h2>

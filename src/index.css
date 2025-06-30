@@ -5,6 +5,7 @@ body {
     background: #0f0f0f;
     color: white;
     font-family: "Helvetica Neue";
+    overflow-x: hidden;
 }
 
 @font-face {

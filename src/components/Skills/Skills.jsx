@@ -28,6 +28,7 @@ const Skills = () => {
                             <img
                                 key={index}
                                 src={img}
+                                loading="lazy"
                                 alt={`Skill ${index + 1}`}
                                 className="w-[60px] h-[60px] object-contain mx-8"
                             />

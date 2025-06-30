@@ -66,7 +66,7 @@ const Hero = () => {
                 {/* Right Image */}
                 <aside className="w-full flex justify-center md:justify-end items-center">
                     <div ref={myimg} className="w-60 h-60 md:w-[450px] md:h-[450px] rounded-full overflow-hidden shadow-lg bg-amber-400 flex justify-center items-center">
-                        <img src={heroImage} alt="Hero" className="my-img w-full h-full object-cover object-top-right md:object-center md:object-contain" />
+                        <img  loading="lazy" src={heroImage} alt="Hero" className="my-img w-full h-full object-cover object-top-right md:object-center md:object-contain" />
                     </div>
 
                 </aside>

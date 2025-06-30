@@ -11,7 +11,7 @@ const Nav = () => {
     const lastScrollY = useRef(0);
 
     const [isAtTop, setIsAtTop] = useState(false);
-
+    const navRef = useRef([]);
     const navItems = [
         { name: "Home", path: "/home" },
         { name: "About", path: "about" },
@@ -54,6 +54,16 @@ const Nav = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    useEffect(() => {
+        gsap.from(navRef.current, {
+            y: -30,
+            opacity: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            stagger: 0.15,
+        });
+    }, []);
+
     return (
         <header
             ref={headerRef}
@@ -66,7 +76,7 @@ const Nav = () => {
                 {/* Desktop Nav */}
                 <ul className="hidden md:flex items-center space-x-6">
                     {navItems.map((nav, index) => (
-                        <li
+                        <li ref={(el) => (navRef.current[index] = el)}
                             key={index}
                             className="relative font-semibold py-0.3 after:absolute after:content-[''] after:w-0 after:h-[2px] after:bg-white after:bottom-0 after:left-0 after:rounded-2xl hover:after:w-full cursor-pointer after:duration-200"
                         >

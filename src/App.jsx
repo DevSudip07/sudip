@@ -1,23 +1,30 @@
-import Nav from "./components/Navbar/Nav";
-import Hero from "./components/Hero/Hero";
-import About from "./components/About/About";
-import Skills from "./components/Skills/Skills";
-import Services from "./components/Services/Services";
-import Projects from "./components/Projects/Projects";
-import Footer from "./components/Footer/Footer";
+import React, { Suspense, lazy } from "react";
+import SplashCursor from "./components/SplashCursor";
+
+const Nav = lazy(() => import("./components/Navbar/Nav"));
+const Hero = lazy(() => import("./components/Hero/Hero"));
+const About = lazy(() => import("./components/About/About"));
+const Skills = lazy(() => import("./components/Skills/Skills"));
+const Services = lazy(() => import("./components/Services/Services"));
+const Projects = lazy(() => import("./components/Projects/Projects"));
+const Footer = lazy(() => import("./components/Footer/Footer"));
 
 const App = () => {
   return (
-    <>
-      <Nav />
-      <Hero />
-      <About />
-      <Skills />
-      <Services />
-      <Projects />
-      <Footer />
-    </>
-  )
-}
+    <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
+      <SplashCursor />
+      <main className="w-full overflow-hidden">
+        <Nav />
+        <Hero />
+        <About />
+        <Skills />
+        <Services />
+        <Projects />
+        <Footer />
+      </main>
 
-export default App
+    </Suspense>
+  );
+};
+
+export default App;

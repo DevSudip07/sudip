@@ -1,6 +1,6 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
 // Register plugin
@@ -29,46 +29,54 @@ const Services = () => {
     const servicesSectionRef = useRef(null);
 
     useGSAP(() => {
-        const tl = gsap.timeline({
-            defaults: { ease: "power4.out", duration: 0.4 },
-            scrollTrigger: {
-                trigger: servicesSectionRef.current,
-                start: "top 70%",
-                end: "bottom 30%",
-                scrub: 2,
-                markers: true,
-            },
+        // Set initial state for all cards
+        gsap.set(serviceCardsRef.current, {
+            scale: 0.6,
+            opacity: 0,
         });
 
+        // Create timeline for each card
         serviceCardsRef.current.forEach((el, index) => {
             if (!el) return;
 
+            let animationProps = {
+                scale: 1,
+                opacity: 1,
+                duration: 0.6,
+                ease: "power2.out",
+            };
+
+            // Add different entrance animations
             if (index === 0) {
-                tl.from(el, {
-                    scale: 0.6,
-                    opacity: 0.5,
-                    x: -200,
-                }, "start");
+                animationProps.x = 0;
+                gsap.set(el, { x: -200 });
+            } else if (index === 2) {
+                animationProps.x = 0;
+                animationProps.rotation = 0;
+                gsap.set(el, { x: 200, rotation: 60 });
             }
 
-            if (index === 1) {
-                tl.from(el, {
-                    scale: 0.6,
-                    opacity: 0.5,
-                }, "start");
-            }
-
-            if (index === 2) {
-                tl.from(el, {
-                    scale: 0.6,
-                    opacity: 0.5,
-                    rotate: 60,
-                    x: 200,
-                }, "start");
-            }
+            // Create ScrollTrigger with scrub for each card
+            ScrollTrigger.create({
+                trigger: el,
+                start: "top 80%",
+                end: "top 20%",
+                scrub: 1,
+                onUpdate: (self) => {
+                    const progress = self.progress;
+                    gsap.to(el, {
+                        ...animationProps,
+                        duration: 0,
+                        scale: 0.6 + (0.4 * progress),
+                        opacity: progress,
+                        x: index === 0 ? -200 + (200 * progress) : index === 2 ? 200 - (200 * progress) : 0,
+                        rotation: index === 2 ? 60 - (60 * progress) : 0,
+                    });
+                },
+                markers: false,
+            });
         });
     }, { scope: servicesSectionRef });
-
 
     return (
         <section
@@ -81,7 +89,7 @@ const Services = () => {
                 <div className="w-50 h-0.5 bg-[var(--p-color)]"></div>
             </div>
 
-            <div ref={servicesSectionRef} className="services-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="services-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {services.map((service, index) => (
                     <div
                         key={index}

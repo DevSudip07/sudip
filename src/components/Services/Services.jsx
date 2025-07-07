@@ -59,14 +59,14 @@ const Services = () => {
             // Create ScrollTrigger with scrub for each card
             ScrollTrigger.create({
                 trigger: el,
-                start: "top 80%",
-                end: "top 20%",
+                start: "top 90%",
+                end: "top 30%",
                 scrub: 1,
                 onUpdate: (self) => {
                     const progress = self.progress;
                     gsap.to(el, {
                         ...animationProps,
-                        duration: 0,
+                        duration: 0.1,
                         scale: 0.6 + (0.4 * progress),
                         opacity: progress,
                         x: index === 0 ? -200 + (200 * progress) : index === 2 ? 200 - (200 * progress) : 0,
@@ -89,7 +89,7 @@ const Services = () => {
                 <div className="w-50 h-0.5 bg-[var(--p-color)]"></div>
             </div>
 
-            <div className="services-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="services-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-15">
                 {services.map((service, index) => (
                     <div
                         key={index}

@@ -11,12 +11,12 @@ const About = () => {
         gsap.from(aboutleftRef.current, {
             x: -300,
             opacity: 0.6,
-            duration: 0.8,
+            duration: 0.5,
             opacity: 0.3,
             scrollTrigger: {
                 trigger: "#about",
-                start: "top 50%",
-                end: "bottom 30%",
+                start: "top 80%",
+                end: "bottom 100%",
                 scrub: 3,
                 // markers: true,
             }

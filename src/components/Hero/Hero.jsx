@@ -9,7 +9,7 @@ import TrueFocus from "../TrueFocus";
 
 
 const Hero = () => {
-    let myimg = useRef()
+    let myimg = useRef();
 
     useGSAP(() => {
         gsap.from(myimg.current, {
@@ -17,14 +17,14 @@ const Hero = () => {
             direction: 0.4,
             delay: 0.2,
             ease: "power1.in"
-        })
-    })
+        });
+    });
 
 
     return (
         <>
 
-            <div className="absolute" style={{ width: '100%', height: '600px', }}>
+            <div className="absolute" style={{ width: '100%', height: '100vh', }}>
                 <Particles
                     particleColors={['#ffffff', '#ffffff']}
                     particleCount={400}
@@ -38,19 +38,21 @@ const Hero = () => {
             </div>
             <section
                 id="hero"
-                className="container mx-auto w-full h-fit pt-25 md:pt-0 min-h-screen flex items-center flex-col-reverse md:flex-row px-4 md:px-40 py-10 gap-10 text-white overflow-hidden"
+                className="container mx-auto w-full h-fit pt-25 md:pt-0 min-h-screen flex items-center flex-col-reverse md:flex-row px-4 md:px-40 py-10 gap-10 text-white overflow-hidden z-50"
             >
 
                 <aside className="w-full text-center md:text-left">
                     <small className="text-sm font-semibold text-[var(--p-color)]">Hi, myself</small>
-                    <TrueFocus
-                        sentence="Sudip Das Ghosh."
-                        manualMode={false}
-                        blurAmount={5}
-                        borderColor="blue"
-                        animationDuration={2}
-                        pauseBetweenAnimations={1}
-                    />
+                    <div className="w-fit my-5">
+                        <TrueFocus
+                            sentence="Sudip Das Ghosh."
+                            manualMode={false}
+                            blurAmount={5}
+                            borderColor="blue"
+                            animationDuration={1}
+                            pauseBetweenAnimations={0.2}
+                        />
+                    </div>
                     <h4 className="text-lg md:text-lg leading-none font-medium opacity-80 mt-3">
                         I build clean, responsive websites and design smooth user experiences.
                     </h4>
@@ -66,7 +68,7 @@ const Hero = () => {
                 {/* Right Image */}
                 <aside className="w-full flex justify-center md:justify-end items-center">
                     <div ref={myimg} className="w-60 h-60 md:w-[450px] md:h-[450px] rounded-full overflow-hidden shadow-lg bg-amber-400 flex justify-center items-center">
-                        <img  loading="lazy" src={heroImage} alt="Hero" className="my-img w-full h-full object-cover object-top-right md:object-center md:object-contain" />
+                        <img loading="lazy" src={heroImage} alt="Hero" className="my-img w-full h-full object-cover object-top-right md:object-center md:object-contain" />
                     </div>
 
                 </aside>
